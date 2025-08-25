@@ -1,0 +1,36 @@
+services:
+  asterisk:
+    image: mlan/asterisk:full
+    container_name: asterisk
+    restart: unless-stopped
+    ports:
+      - "5060:5060/udp"
+      - "5060:5060/tcp"
+      - "10000-10200:10000-10200/udp"
+      - "8088:8088/tcp"
+    volumes:
+      - ./config:/etc/asterisk
+      - ./sounds:/var/lib/asterisk/sounds/custom
+      - ./system-sounds:/var/lib/asterisk/sounds/system
+    environment:
+      - TZ=Europe/Moscow
+    networks:
+      - ivr-network
+
+  ivr-app:
+    build:
+          context: .
+          dockerfile: Dockerfile.api
+    container_name: api
+    restart: unless-stopped
+    ports:
+      - "4573:4573"
+      - "8080:8080"
+    depends_on:
+      - asterisk
+    networks:
+      - ivr-network
+
+networks:
+  ivr-network:
+    driver: bridge
