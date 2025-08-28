@@ -2,8 +2,12 @@ FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-COPY /build/libs/*.jar app.jar
+# Копируем исходный код
+COPY . .
+
+# Собираем проект (замените на вашу команду сборки)
+RUN ./gradlew build
 
 EXPOSE 8080 4573
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "build/libs/your-app-name.jar"]
