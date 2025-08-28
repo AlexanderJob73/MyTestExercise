@@ -20,20 +20,7 @@ services:
     networks:
       - ivr-network
 
-  ivr-app:
-    build:
-      context: .
-      dockerfile: Dockerfile.api
-    container_name: api
-    restart: unless-stopped
-    ports:
-      - "4573:4573"
-      - "8080:8080"
-    depends_on:
-      - asterisk
-    networks:
-      - ivr-network
-
+      
 networks:
   ivr-network:
     driver: bridge
