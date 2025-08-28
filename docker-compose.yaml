@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   asterisk:
     image: mlan/asterisk:full
@@ -7,6 +9,7 @@ services:
       - "5060:5060/udp"
       - "5060:5060/tcp"
       - "10000-10200:10000-10200/udp"
+      - "10000-10200:10000-10200/tcp"
       - "8088:8088/tcp"
     volumes:
       - ./config:/etc/asterisk
@@ -19,8 +22,8 @@ services:
 
   ivr-app:
     build:
-          context: .
-          dockerfile: Dockerfile.api
+      context: .
+      dockerfile: Dockerfile.api
     container_name: api
     restart: unless-stopped
     ports:
