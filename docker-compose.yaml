@@ -16,8 +16,8 @@ services:
       - ./system-sounds:/var/lib/asterisk/sounds/system
     environment:
       - TZ=Europe/Moscow
-    networks:
-      - ivr-network
+#    networks:
+#      - ivr-network
 
 #networks:
 #  ivr-network:
