@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   asterisk:
-    image: mlan/asterisk:full
+    image: andrius/asterisk
     container_name: asterisk
     restart: unless-stopped
     ports:
@@ -10,7 +10,6 @@ services:
       - "5060:5060/tcp"
       - "10000-10200:10000-10200/udp"
       - "10000-10200:10000-10200/tcp"
-      - "8088:8088/tcp"
     volumes:
       - ./config:/etc/asterisk
       - ./sounds:/var/lib/asterisk/sounds/custom
@@ -20,7 +19,6 @@ services:
     networks:
       - ivr-network
 
-      
-networks:
-  ivr-network:
-    driver: bridge
+#networks:
+#  ivr-network:
+#    driver: bridge
